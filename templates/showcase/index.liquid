@@ -1,0 +1,3448 @@
+<style type="text/css">
+/* General Styles */
+.product-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.product-main-content {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+
+.product-image {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.product-card h2 {
+  font-size: 20px;
+  margin: 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.variant-price >.out-of-stock {
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.variant-price {
+  font-size: 14px;
+  font-weight: 100;
+  color: #333;
+}
+
+
+
+.product-description {
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.read-more {
+  color: #000;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: fit-content;
+  border-bottom: 1px solid #000;
+}
+
+.variant-selector {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23333333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.variant-selector:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.variant-selector:hover {
+  border-color: #999;
+}
+
+.variant-selector::-ms-expand {
+  display: none;
+}
+
+.color-label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.product-actions-container {
+  width: 100%;
+  align-items: center;
+  height: 100%;
+}
+
+.product-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.quantity-controls {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 44px;
+}
+
+.quantity-btn {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  min-width: 32px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+}
+
+.quantity-input {
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  width: 50px;
+  background-color: transparent;
+}
+input.quantity-input {
+  padding: 0px
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.add-to-bundle-btn {
+  background: #333333;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 0 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 44px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.add-to-bundle-btn:hover {
+  background: #555555;
+}
+
+.add-to-bundle-btn:disabled {
+  background: #cccccc;
+  border-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.add-to-bundle-btn:disabled:hover {
+  background: #cccccc;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .product-card {
+    padding: 16px;
+  }
+
+  .product-main-content {
+    gap: 16px;
+  }
+
+  .product-image {
+    width: 80px;
+  }
+
+  .product-info {
+    gap: 4px;
+  }
+
+  .product-card h2 {
+    font-size: 18px;
+  }
+
+  .product-actions {
+    grid-column: 1 / -1;
+    margin: 0;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .quantity-controls {
+    width: 50%;
+    flex: 1;
+  }
+
+  .add-to-bundle-btn {
+    width: 50%;
+    flex: 1;
+  }
+}
+
+/* Bundle Header Styles */
+.bundle-header {
+  position: relative;
+  width: 100%;
+  height: 348px;
+  margin-bottom: 16px;
+  background: #f5f5f5;
+}
+
+.bundle-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  background-color: rgb(236, 236, 236);
+}
+
+.bundle-header-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px 64px;
+}
+
+.bundle-header-text {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.bundle-subheading {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bundle-heading {
+  font-size: 48px;
+  color: #000;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.bundle-description {
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Steps Container */
+.steps-container {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0;
+}
+
+.steps-heading {
+  font-size: 36px;
+  margin: 40px 0 48px 0;
+  padding: 0;
+  text-align: left;
+}
+
+.steps-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.step-item {
+  flex-basis: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  min-height: 100%;
+}
+
+.step-image {
+  height: 80px;
+  width: 80px;
+  margin: 0;
+  padding: 0;
+}
+
+.step-title {
+  font-size: 24px;
+  margin: 0 0 16px 0;
+  padding: 0;
+}
+
+.step-description {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Section Name Container */
+.section-name-container {
+  max-width: 1280px;
+  margin: 0 auto 20px;
+  padding: 0;
+}
+
+.bundle-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.section-name-container h1 {
+  margin: 0;
+}
+
+.bundle-header-text {
+  max-width: 600px;
+}
+
+.promo-heading {
+  font-size: 36px;
+  color: #333;
+  margin: 40px 0 48px 0;
+  padding: 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Fixed Bottom Container */
+.fixed-bottom-container {
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.subtotal-container {
+  display: inline;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.subtotal-label {
+  font-size: 16px;
+  color: #000;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.subtotal-price {
+  font-size: 24px;
+  color: #000;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.fixed-add-to-bundle-btn {
+  background: #333333;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.fixed-add-to-bundle-btn:hover {
+  background: #555555;
+}
+
+.fixed-add-to-bundle-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.bundle-content {
+  padding-bottom: 80px;
+}
+
+.fixed-bottom-container .bundle-builder--add-to-cart-form button {
+  background: #333333;
+  color: #fff;
+  border: none;
+  padding: 12px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.fixed-bottom-container .bundle-builder--add-to-cart-form button:hover {
+  background: #555555;
+}
+
+.fixed-bottom-container .bundle-builder--add-to-cart-form button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+  .product-card {
+    grid-template-columns: 80px 1fr;
+    grid-template-areas: 
+      "image info"
+      "actions actions";
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .product-card img {
+    grid-area: image;
+    width: 80px;
+    height: 80px;
+  }
+
+  .product-info {
+    grid-area: info;
+    max-width: 100%;
+  }
+
+  .product-actions-container {
+    grid-area: actions;
+    width: 100%;
+  }
+
+  .bundle-builder--add-to-bundle-form {
+    width: 100%;
+  }
+
+  .product-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .quantity-controls {
+    flex: 1;
+    width: 50%;
+    min-width: unset;
+  }
+
+  .add-to-bundle-btn {
+    flex: 1;
+    width: 50%;
+  }
+
+  .quantity-btn {
+    min-width: 32px;
+    width: 32px;
+  }
+
+  .quantity-input {
+    flex: 1;
+    width: auto;
+  }
+
+  .fixed-bottom-container {
+    bottom: 80px;
+    padding: 15px 5px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .product-grid {
+    padding: 0;
+  }
+}
+
+@media (max-width: 942px) {
+  .steps-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Bundle Summary */
+.bundle-summary {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  z-index: 99;
+  display: none;
+}
+
+.bundle-summary-content {
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.bundle-summary-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0;
+  max-width: calc(100% - 150px);
+  justify-content: center;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.bundle-summary-row::-webkit-scrollbar {
+  display: none;
+}
+
+.summary-item {
+  flex: 0 0 auto;
+  width: 80px;
+  position: relative;
+  padding-right: 48px;
+  margin: 0px 24px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 80px;
+}
+
+.summary-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.summary-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.summary-info {
+  font-size: 12px;
+  color: #000;
+  line-height: 1.2;
+}
+
+.summary-info p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.summary-divider {
+  position: absolute;
+  right: -24px;
+  top: 70px;
+  transform: translateX(50%);
+  color: #000;
+  z-index: 1;
+  padding: 0px 24px;
+}
+
+.summary-divider svg {
+  width: 16px;
+  height: 16px;
+}
+
+.summary-item:last-child .summary-divider {
+  display: none;
+}
+
+.view-bundle-button {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+.view-bundle-button button {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.bundle-content {
+  padding-bottom: 160px;
+}
+
+@media (max-width: 768px) {
+  .bundle-summary {
+    bottom: 0px;
+  }
+
+  .bundle-content {
+    padding-bottom: 200px;
+  }
+
+  .bundle-summary-content {
+    padding: 0 5px;
+  }
+
+  .bundle-summary-row {
+    justify-content: center;
+  }
+
+  .bundle-summary-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bundle-summary-row {
+    max-width: 100%;
+  }
+
+  .view-bundle-button {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 782px) {
+  .bundle-summary-row {
+    display: none;
+  }
+
+  .bundle-summary-content {
+    padding: 0 5px;
+  }
+
+  .view-bundle-button {
+    margin: 0;
+    width: 100%;
+  }
+
+  .view-bundle-button button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .fixed-bottom-container {
+    bottom: 60px;
+  }
+
+  .bundle-summary {
+    padding: 12px 0;
+  }
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  pointer-events: none;
+  padding: 20px;
+}
+
+.popup-overlay.active {
+  display: flex;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.popup-content {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 1000px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .popup-content {
+    padding: 20px;
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .popup-overlay {
+    padding: 0;
+  }
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.popup-product-header {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 0;
+  align-items: flex-start;
+}
+
+.popup-product-image {
+  width: 480px !important;
+  height: 480px !important;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.popup-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.popup-product-title {
+  font-size: 28px;
+  margin: 0;
+  color: #333;
+  line-height: 1.2;
+}
+
+.popup-product-price {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #2c2c2c;
+  margin: 0;
+}
+
+.popup-product-description {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.popup-product-actions {
+  margin-top: 20px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .popup-product-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .popup-product-image {
+    width: 100% !important;
+    max-width: 480px !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+
+  .popup-product-info {
+    gap: 15px;
+  }
+}
+
+.popup-content .popup-product-image {
+  width: 480px;
+  height: 480px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .popup-content .popup-product-image {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+}
+
+/* Bundle Builder Form */
+.bundle-builder--add-to-bundle-form {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .product-actions-container {
+    height: auto;
+    width: 100%;
+  }
+  
+  .product-actions {
+    grid-column: 1 / -1;
+    margin: 0;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .quantity-controls {
+    width: 50%;
+    flex: 1;
+  }
+
+  .add-to-bundle-btn {
+    width: 50%;
+    flex: 1;
+  }
+}
+
+/* Body Popup Open */
+body.popup-open {
+  overflow: hidden;
+  padding-right: 17px;
+}
+
+@media (max-width: 768px) {
+  body.popup-open {
+    padding-right: 0;
+  }
+}
+
+/* Bundle Items List */
+.bundle-items-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.bundle-item {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .bundle-items-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bundle-items-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+}
+
+/* Bundle Summary Popup */
+.bundle-summary-popup {
+  max-width: 1000px;
+  text-align: center;
+}
+
+.bundle-summary-title {
+  font-size: 32px;
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.bundle-summary-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.bundle-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.bundle-item .product-actions {
+  margin-top: auto;
+}
+
+.bundle-item .quantity-controls {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bundle-item .quantity-btn {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  min-width: 32px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+}
+
+.bundle-item .quantity-input {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  min-width: 40px;
+}
+
+.bundle-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bundle-item-image {
+  width: 100%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.bundle-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.bundle-item-info h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.variant-title {
+  color: #666;
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.item-price {
+  font-weight: bold;
+  margin: 0 0 4px;
+}
+
+.item-quantity {
+  color: #666;
+  margin: 0;
+}
+
+.bundle-summary-footer {
+  max-width: 900px;
+}
+
+.bundle-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.bundle-total-label {
+  font-size: 14px;
+  color: #666;
+  text-align: left;
+  float: left;
+}
+
+.bundle-total-price {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+  float: right;
+}
+
+.bundle-summary-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.bundle-builder--add-to-cart-form {
+  width: auto;
+  max-width: fit-content;
+}
+
+.bundle-builder--add-to-cart-form button {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #CCCCCC;
+  padding: 14px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.bundle-builder--add-to-cart-form button:hover {
+  background: #FAFAFA;
+  color: #000;
+}
+
+.bundle-builder--add-to-cart-form button:disabled {
+  background: #fff;
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .bundle-summary-items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .bundle-summary-items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .bundle-summary-items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.item-required {
+  color: #e41e31;
+  font-size: 12px;
+  margin: 4px 0 0;
+  font-weight: 500;
+}
+
+.bundle-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bundle-item {
+  position: relative;
+}
+
+.bundle-item-info h3 {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.item-quantity {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.quantity-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-btn[disabled] svg path {
+  fill: #999;
+}
+
+/* Section Switch Form */
+form.bundle-builder--section-switch-form>button {
+  background: #333333;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 2;
+  height: 44px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  width: 100px;
+}
+
+form.bundle-builder--section-switch-form {
+  text-align: center;
+}
+
+/* Bundle Builder Container */
+.bundle-builder-container {
+  display: flex;
+  width: 100%;
+  background: white;
+}
+
+.bundle-main-content {
+  flex: 1;
+  max-width: calc(100% - 400px); 
+}
+
+.bundle-header {
+  position: relative;
+  width: 100%;
+  height: 348px;
+  margin-bottom: 16px;
+  background: #f5f5f5;
+}
+
+.bundle-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  background-color: rgb(236, 236, 236);
+}
+
+.bundle-header-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px 64px;
+}
+
+.bundle-header-text {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.bundle-steps-text {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+@media (max-width: 1024px) {
+  .product-grid {
+    padding: 0;
+  }
+}
+
+/* Bundle Side Summary */
+.bundle-side-summary {
+  width: 425px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: #fafafa;
+  padding: 48px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1440px) {
+  .bundle-main-content {
+    max-width: calc(100% - 400px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .bundle-builder-container {
+    flex-direction: column;
+  }
+
+  .bundle-main-content {
+    max-width: 100%;
+  }
+
+  .bundle-side-summary {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+}
+
+.bundle-side-header {
+  padding-bottom: 12px;
+}
+
+.bundle-side-title {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 500;
+  color: #333;
+}
+
+.bundle-side-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.bundle-items-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.bundle-item {
+  width: 100%;
+}
+
+.bundle-item-image {
+  width: 100%;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.bundle-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.bundle-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bundle-item-info h3 {
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.item-quantity {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .bundle-items-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .bundle-item-info h3 {
+    font-size: 11px;
+  }
+
+  .item-quantity {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bundle-items-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+}
+
+.remove-item {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #333;
+  text-decoration: underline;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+}
+
+.bundle-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.bundle-total-label {
+  font-size: 14px;
+  color: #666;
+  text-align: left;
+  float: left;
+}
+
+.bundle-total-price {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+  float: right;
+}
+
+.bundle-summary-actions {
+  width: 100%;
+}
+
+.bundle-summary-actions button {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 14px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.bundle-summary-actions button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.bundle-summary-actions button:disabled {
+  background: #fff;
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Accordion Section */
+.accordion-section {
+  border-bottom: 1px solid #eee;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion-header h3 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.accordion-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.accordion-icon .plus-icon {
+  display: block;
+}
+
+.accordion-icon .minus-icon {
+  display: none;
+}
+
+.accordion-icon.active .plus-icon {
+  display: none;
+}
+
+.accordion-icon.active .minus-icon {
+  display: block;
+}
+
+.accordion-content {
+  padding: 0 0 16px;
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.25s linear;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.accordion-content.active {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.25s linear;
+}
+
+.accordion-icon .plus-icon,
+.accordion-icon .minus-icon {
+  transition: all 0.25s linear;
+  position: absolute;
+  transform-origin: center;
+}
+
+.accordion-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion-icon .plus-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.accordion-icon .minus-icon {
+  opacity: 0;
+  transform: rotate(-180deg);
+}
+
+.accordion-icon.active .plus-icon {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+.accordion-icon.active .minus-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.bundle-description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.bundle-items-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.bundle-item {
+  width: 100%;
+}
+
+.bundle-item-image {
+  width: 100%;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.bundle-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.bundle-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bundle-item-info h3 {
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.item-quantity {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .bundle-items-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .bundle-item-info h3 {
+    font-size: 11px;
+  }
+
+  .item-quantity {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bundle-items-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+}
+
+.bundle-requirements {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.bundle-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.bundle-total-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.bundle-total-price {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bundle-summary-actions {
+  width: 100%;
+}
+
+.bundle-summary-actions button {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 14px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.bundle-summary-actions button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.bundle-summary-actions button:disabled {
+  background: #fff;
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .bundle-builder-container {
+    flex-direction: column;
+  }
+
+  .bundle-main-content {
+    max-width: 100%;
+  }
+
+  .bundle-side-summary {
+    position: relative;
+    top: 0;
+    height: auto;
+    margin-bottom: 40px;
+  }
+
+  .fixed-bottom-container,
+  .bundle-summary {
+    display: block;
+  }
+}
+
+h2.bundle-steps-subheading {
+  padding: 0px 64px;
+}
+
+.bundle-total > span {
+  margin: 0;
+  padding: 0;
+}
+
+.bundle-item-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: rgb(242, 242, 242);
+  border-radius: 0;
+  display: block !important;
+}
+
+.mobile-toaster {
+  display: none;
+  position: fixed;
+  top: 0px;
+  margin: 20px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.mobile-toaster.hidden {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-toaster {
+    display: block;
+  }
+}
+
+.toaster-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toaster-message {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.toaster-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .mobile-toaster {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  form.bundle-builder--change-quantity-form {
+    width: 100%;
+  }
+  
+  .product-actions-container {
+    height: auto;
+    width: 100%;
+  }
+  
+  .product-actions {
+    grid-column: 1 / -1;
+    margin: 0;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .quantity-controls {
+    width: 50%;
+    flex: 1;
+  }
+
+  .add-to-bundle-btn {
+    width: 50%;
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup-content.bundle-summary-popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    padding: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .popup-overlay.active .popup-content.bundle-summary-popup {
+    transform: translateX(0);
+  }
+
+  .bundle-summary-popup .bundle-summary-title {
+    font-size: 24px;
+    margin: 0 0 20px;
+    text-align: left;
+  }
+
+  .bundle-summary-popup .bundle-summary-items {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bundle-summary-popup .bundle-item {
+    width: 100%;
+  }
+
+  .bundle-summary-popup .bundle-item-image {
+    width: 100%;
+    height: 100px;
+  }
+
+  .bundle-summary-popup .bundle-summary-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: #f9f9f9;
+  }
+
+  .bundle-summary-popup .bundle-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .bundle-summary-popup .bundle-total-label {
+    font-size: 16px;
+    margin-bottom: -8px;
+  }
+
+  .bundle-summary-popup .bundle-total-price {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    position: relative;
+    top: 2px;
+  }
+
+  .bundle-summary-popup .bundle-summary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .bundle-summary-popup .bundle-builder--add-to-cart-form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .bundle-summary-popup .bundle-builder--add-to-cart-form button {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .bundle-summary-popup .bundle-builder--add-to-cart-form button:disabled {
+    background: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  .bundle-summary-popup .hide-items-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: underline;
+  }
+
+  .popup-content.bundle-summary-popup .popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+  }
+
+  .bundle-summary {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .bundle-side-summary {
+    display: none; 
+  }
+
+  .bundle-summary {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px;
+    border-top: 1px solid #eee;
+    z-index: 99;
+    display: flex !important; 
+    flex-direction: column;
+    
+  }
+
+  .bundle-summary-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .bundle-summary-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .bundle-summary-total {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .bundle-summary-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .view-bundle-button button {
+    background: none;
+    border: 1px solid #000;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .popup-content.bundle-summary-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .popup-overlay.active .popup-content.bundle-summary-popup {
+    transform: translateY(0);
+  }
+
+  .bundle-summary-popup .popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .bundle-summary-popup .bundle-summary-items {
+    max-height: calc(90vh - 200px);
+    overflow-y: auto;
+  }
+
+  .bundle-summary-popup .bundle-summary-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .bundle-summary {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f9f9f9;
+    padding: 16px;
+    border-top: 1px solid #eee;
+    z-index: 99;
+    display: flex !important;
+    padding-bottom: 30px;
+  }
+
+  .bundle-summary-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse; 
+    gap: 12px;
+  }
+
+  .bundle-summary-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .bundle-summary-total {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .bundle-summary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 8px; 
+  }
+
+  .view-bundle-button {
+    width: 100%;
+    background: transparent;
+        border: unset;
+        padding: 10px;
+  }
+
+  .view-bundle-button button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: underline;
+  }
+
+  .bundle-builder--add-to-cart-form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .bundle-builder--add-to-cart-form button {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .bundle-builder--add-to-cart-form button:disabled {
+    background: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  span.bundle-summary-subtotal {
+    font-size: 16px;
+    margin-bottom: -10px;
+  }
+}
+
+/* Observer */
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
+.bundle-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.hide-items-btn {
+  width: 100%;
+  background: transparent;
+  color: #333;
+  border: none;
+  padding: 14px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.hide-items-btn:hover {
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .bundle-summary-actions {
+    gap: 12px;
+  }
+
+  .hide-items-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+.popup-content.bundle-summary-popup .bundle-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.popup-content.bundle-summary-popup .hide-items-btn {
+  width: 100%;
+  background: transparent;
+  color: #333;
+  border: none;
+  padding: 14px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.popup-content.bundle-summary-popup .hide-items-btn:hover {
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .popup-content.bundle-summary-popup .bundle-summary-actions {
+    gap: 9px;
+  }
+
+  .popup-content.bundle-summary-popup .hide-items-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+.hide-items-btn {
+  display: none;
+}
+
+.popup-content.bundle-summary-popup .hide-items-btn {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: #333;
+  border: none;
+  padding: 14px;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.popup-content.bundle-summary-popup .hide-items-btn:hover {
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .popup-content.bundle-summary-popup .bundle-summary-actions {
+    gap: 9px;
+  }
+
+  .popup-content.bundle-summary-popup .hide-items-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+.popup-content.bundle-summary-popup .accordion-section {
+  border-bottom: 1px solid #eee;
+}
+
+.popup-content.bundle-summary-popup .accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.popup-content.bundle-summary-popup .accordion-header h3 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.popup-content.bundle-summary-popup .accordion-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+  padding: 0;
+  opacity: 0;
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.popup-content.bundle-summary-popup .accordion-content.active {
+  height: auto;
+  padding: 0 0 16px;
+  opacity: 1;
+}
+
+.popup-content.bundle-summary-popup .accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.popup-content.bundle-summary-popup .accordion-icon.active {
+  transform: rotate(180deg);
+}
+
+.popup-content.bundle-summary-popup .minus-icon {
+  display: none;
+}
+
+.popup-content.bundle-summary-popup .accordion-icon.active .plus-icon {
+  display: none;
+}
+
+.popup-content.bundle-summary-popup .accordion-icon.active .minus-icon {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .popup-content.bundle-summary-popup .accordion-header {
+    padding: 12px 0;
+  }
+  
+  .popup-content.bundle-summary-popup .accordion-header h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .accordion-content {
+    max-height: 1000px !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  .accordion-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup-content.bundle-summary-popup .accordion-content {
+    height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .popup-content.bundle-summary-popup .accordion-content.active {
+    height: auto;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .popup-content.bundle-summary-popup .accordion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .popup-content.bundle-summary-popup .accordion-icon.active {
+    transform: rotate(180deg);
+  }
+  
+  .popup-content.bundle-summary-popup .plus-icon,
+  .popup-content.bundle-summary-popup .minus-icon {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .popup-content.bundle-summary-popup .minus-icon {
+    display: none;
+  }
+  
+  .popup-content.bundle-summary-popup .accordion-icon.active .plus-icon {
+    display: none;
+  }
+  
+  .popup-content.bundle-summary-popup .accordion-icon.active .minus-icon {
+    display: block;
+  }
+}
+
+@media (min-width: 1440px) {
+  .product-card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 32px;
+    background: #fff;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-main-content {
+    padding: 0;
+  }
+
+  .product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    width: 55%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .variant-selector-container {
+    width: 75%;
+    float: right;
+  }
+}
+
+.popup-product-actions {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.popup-variant-selector-container {
+  width: 100%;
+}
+
+.popup-variant-selector {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23333333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.popup-color-label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.popup-quantity-controls {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 44px;
+}
+
+.popup-quantity-btn {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  min-width: 32px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+}
+
+.popup-quantity-input {
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  width: 50px;
+  background-color: transparent;
+}
+
+.popup-quantity-input::-webkit-outer-spin-button,
+.popup-quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.popup-add-to-bundle-btn {
+  background: #333333;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 0 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 44px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.popup-add-to-bundle-btn:hover {
+  background: #555555;
+}
+
+.popup-add-to-bundle-btn:disabled {
+  background: #cccccc;
+  border-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.popup-add-to-bundle-btn:disabled:hover {
+  background: #cccccc;
+}
+
+@media (max-width: 768px) {
+  .popup-product-actions {
+    width: 100%;
+  }
+  
+  .popup-actions {
+    grid-column: 1 / -1;
+    margin: 0;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .popup-quantity-controls {
+    width: 50%;
+    flex: 1;
+  }
+
+  .popup-add-to-bundle-btn {
+    width: 50%;
+    flex: 1;
+  }
+}
+</style>
+
+<script type="text/javascript">
+  const selectedVariants = new Map();
+
+  function setAddDisabled(form) {
+    const variantId = form.querySelector('[name="variant"]').value;
+    const sectionId = form.querySelector('[name="section"]').value;
+    const canAdd = window.BundleBuilder.canAddVariant(variantId, sectionId);
+    form.querySelector('[type="submit"]').disabled = !canAdd;
+  }
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.bundle-builder--add-to-bundle-form select[name="variant"]'),
+    function (select) {
+      select.addEventListener('change', function (e) {
+        const variantId = e.target.value;
+        selectedVariants.set(e.target.id, variantId);
+        const price = e.target.querySelector('option[value="' + variantId + '"]').dataset.price;
+        e.target.parentNode.querySelector('.variant-price').textContent = price;
+
+        const form = e.target.parentElement;
+        setAddDisabled(form);
+      });
+    }
+  );
+
+  function render() {
+    selectedVariants.forEach(function (variantId, selectId) {
+      const select = document.getElementById(selectId);
+      if (select) {
+        select.value = variantId;
+      }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.bundle-builder--add-to-bundle-form'), setAddDisabled);
+  }
+
+  document.body.addEventListener('bundlebuilder:render', render);
+  render();
+</script>
+
+{% if bundle.published %}
+  <div class="bundle-builder-container">
+    <div class="bundle-main-content">
+      <div class="bundle-header">
+        <img
+          src="https://live.bb.eight-cdn.com/static/assets/imagePlaceholder-xbgPBTTe.svg"
+          alt="Bundle header"
+          class="bundle-header-bg"
+        >
+        <div class="bundle-header-content">
+          <div class="bundle-header-text">
+            <p class="bundle-subheading">BUNDLE BUILDER</p>
+            <h1 class="bundle-heading">Create your own bundle</h1>
+            <p class="bundle-description"></p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        console.log('Bundle Content:', JSON.parse({{ bundle.content.items | json | json_string }}));
+      </script>
+      <div class="bundle-steps-text">
+        <h2 class="bundle-steps-subheading">{{ bundle.current_section.name }}</h2>
+      </div>
+      
+      <div class="product-grid">
+        {% for product in bundle.current_section.products %}
+          <div class="product-card">
+            <div class="product-main-content">
+              <div class="product-image">
+                <img src="{{ product.image.src }}" alt="{{ product.title }}">
+              </div>
+              <div class="product-info">
+                <h2>{{ product.title }}</h2>
+                <span class="variant-price">
+                  {% if product.variants[0].available_count == 0 %}
+                    <span class="out-of-stock">
+                    Out of stock
+                    </span>
+                  {% else %}
+                    {{ product.variants[0].price | money }}
+                  {% endif %}
+                </span>
+                <p class="product-description">
+                  {{ product.description | strip_html | truncate: 100 }}
+                </p>
+                <button class="read-more" onclick="openPopup('popup-{{ product.id }}')">
+                  Read more
+                  <span class="read-more-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" fill="none">
+                      <path stroke="currentColor" stroke-linecap="round" d="M1 .5 6 5 1 9.5" style="stroke-width: 1.4;"></path>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div id="product-actions-{{ product.id }}" class="product-actions-container">
+              {% if product.variants_in_bundle.size == 0 %}
+                {% add_to_bundle_form bundle.current_section %}
+                  {% if product.available_variants.size > 1 %}
+                    <div class="variant-selector-container">
+                        {% comment %} change the color naming to be more dynamic {% endcomment %}
+                        <label for="variant" class="color-label">Color</label>
+                    <select name="variant" class="variant-selector">
+                      {% for variant in product.available_variants %}
+                        <option value="{{ variant.id }}" {% if forloop.first %}selected{% endif %}>
+                          {{ variant.title }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                    </div>
+                  {% else %}
+                    <select name="variant" style="display: none; ">
+                      {% for variant in product.available_variants %}
+                        <option value="{{ variant.id }}" {% if forloop.first %}selected{% endif %}>
+                          {{ variant.title }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  {% endif %}
+
+
+                  <div class="product-actions">
+                    <div class="quantity-controls">
+                      <button type="button" class="quantity-btn minus" aria-label="Decrease quantity by 1">
+                        <svg width="12" height="12" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                        </svg>
+                      </button>
+                      <input type="number" name="quantity" class="quantity-input" value="1" min="1" max="99">
+                      <button type="button" class="quantity-btn plus" aria-label="Increase quantity by 1">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="submit" class="add-to-bundle-btn" {% if product.variants[0].available_count == 0 %}disabled{% endif %}>
+                      {% if product.variants_in_bundle.size > 0 %}
+                        {{ product.variants_in_bundle.size }} Added
+                      {% elsif product.variants[0].available_count == 0 %}
+                        Sold Out
+                      {% else %}
+                        Add
+                      {% endif %}
+                    </button>
+                  </div>
+                {% end_add_to_bundle_form %}
+              {% else %}
+                {% for variant in product.variants_in_bundle %}
+                    
+                  {% change_quantity_form %}
+                  <div class="product-actions">
+                    <div class="quantity-controls">
+                      <button type="submit" name="remove" class="quantity-btn minus" aria-label="Decrease quantity by 1">
+                        <svg
+                          data-testid="minus-icon"
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 2"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                        </svg>
+                      </button>
+                      <span class="quantity-input">{{ variant.count }}</span>
+                      <button type="submit" name="add" class="quantity-btn plus" aria-label="Increase quantity by 1">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <input type="hidden" name="variant" value="{{ variant.id }}">
+                    <input type="hidden" name="section" value="{{ bundle.current_section.index }}">
+                  </div>
+                  {% end_change_quantity_form %}
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div id="popup-{{ product.id }}" class="popup-overlay">
+              <div class="popup-content">
+                <button class="popup-close" onclick="closePopup('popup-{{ product.id }}')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+
+                <div class="popup-product-header">
+                  <img class="popup-product-image" src="{{ product.image.src }}" alt="{{ product.title }}">
+                  <div class="popup-product-info">
+                    <h2 class="popup-product-title">{{ product.title }}</h2>
+                    <span class="popup-product-price">
+                      {% if product.variants[0].available_count == 0 %}
+                        <span class="out-of-stock">
+                        Out of stock
+                        </span>
+                      {% else %}
+                        {{ product.variants[0].price | money }}
+                      {% endif %}
+                    </span>
+                    <div class="popup-product-description">
+                      {{ product.description }}
+                    </div>
+                    
+                    <!-- New separate product actions for popup -->
+                    <div class="popup-product-actions">
+                      {% if product.variants_in_bundle.size == 0 %}
+                        {% add_to_bundle_form bundle.current_section %}
+                          {% if product.available_variants.size > 1 %}
+                            <div class="popup-variant-selector-container">
+                              <label for="variant" class="popup-color-label">Color</label>
+                              <select name="variant" class="popup-variant-selector">
+                                {% for variant in product.available_variants %}
+                                  <option value="{{ variant.id }}" {% if forloop.first %}selected{% endif %}>
+                                    {{ variant.title }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          {% else %}
+                            <select name="variant" style="display: none;">
+                              {% for variant in product.available_variants %}
+                                <option value="{{ variant.id }}" {% if forloop.first %}selected{% endif %}>
+                                  {{ variant.title }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          {% endif %}
+
+                          <div class="popup-actions">
+                            <div class="popup-quantity-controls">
+                              <button type="button" class="popup-quantity-btn minus" aria-label="Decrease quantity by 1">
+                                <svg width="12" height="12" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                                </svg>
+                              </button>
+                              <input type="number" name="quantity" class="popup-quantity-input" value="1" min="1" max="99">
+                              <button type="button" class="popup-quantity-btn plus" aria-label="Increase quantity by 1">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <button type="submit" class="popup-add-to-bundle-btn" {% if product.variants[0].available_count == 0 %}disabled{% endif %}>
+                              {% if product.variants_in_bundle.size > 0 %}
+                                {{ product.variants_in_bundle.size }} Added
+                              {% elsif product.variants[0].available_count == 0 %}
+                                Sold Out
+                              {% else %}
+                                Add
+                              {% endif %}
+                            </button>
+                          </div>
+                        {% end_add_to_bundle_form %}
+                      {% else %}
+                        {% for variant in product.variants_in_bundle %}
+                          {% change_quantity_form %}
+                          <div class="popup-actions">
+                            <div class="popup-quantity-controls">
+                              <button type="submit" name="remove" class="popup-quantity-btn minus" aria-label="Decrease quantity by 1">
+                                <svg width="12" height="12" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                                </svg>
+                              </button>
+                              <span class="popup-quantity-input">{{ variant.count }}</span>
+                              <button type="submit" name="add" class="popup-quantity-btn plus" aria-label="Increase quantity by 1">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                                </svg>
+                              </button>
+                            </div>
+                            <input type="hidden" name="variant" value="{{ variant.id }}">
+                            <input type="hidden" name="section" value="{{ bundle.current_section.index }}">
+                          </div>
+                          {% end_change_quantity_form %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <script>
+        document.querySelectorAll('.variant-selector').forEach((select) => {
+          select.addEventListener('change', function (e) {
+            const option = this.options[this.selectedIndex];
+            const variantImage = option.dataset.image;
+            if (variantImage) {
+              const productCard = this.closest('.product-card');
+              const productImage = productCard.querySelector('img');
+              productImage.src = variantImage;
+            }
+          });
+        });
+      </script>
+
+      {% if bundle.has_next_section or bundle.has_prev_section %}
+        <div style="display: flex; justify-content: {% if bundle.has_next_section and bundle.has_prev_section %}space-between{% elsif bundle.has_next_section %}flex-end{% else %}flex-start{% endif %}; margin: 20px auto; width: 80%;">
+          {% if bundle.has_prev_section %}
+            {% section_switch_form %}
+            <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: -1 }}">
+            <button type="submit" class="section-switch-btn">Previous</button>
+            {% end_section_switch_form %}
+          {% endif %}
+
+          {% if bundle.has_next_section %}
+            {% section_switch_form %}
+            <input type="hidden" name="section" value="{{ bundle.current_section.index | plus: 1 }}">
+            <button type="submit" class="section-switch-btn">Next</button>
+            {% end_section_switch_form %}
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if bundle.errors.size > 0 %}
+        <ul>
+          {% for error in bundle.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class="bundle-summary">
+        <div class="bundle-summary-content">
+          <div class="bundle-summary-row">
+            {% for item in bundle.content.items %}
+              <div class="summary-item">
+                <div class="summary-card">
+                  <div class="summary-image-container">
+                    {% if item.variant.image %}
+                      <img class="summary-image" src="{{ item.variant.image.src }}" alt="{{ item.variant.name }}">
+                    {% elsif item.variant.product.image %}
+                      <img
+                        class="summary-image"
+                        src="{{ item.variant.product.image.src }}"
+                        alt="{{ item.variant.product.title }}"
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="summary-info">
+                    <p>{{ item.variant.name }}</p>
+                    {% if item.variant.title != 'Default Title' %}
+                      <p>{{ item.variant.title }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+                {% unless forloop.last %}
+                  <div class="summary-divider" style="--icon-color: #000; --padding: 24px; --top-offset: 40px;">
+                    <svg
+                      class="Divider-module__summary-row-divider-svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect y="7.5" width="16" height="1" fill="currentColor"></rect>
+                      <rect x="7.5" y="16" width="16" height="1" transform="rotate(-90 7.5 16)" fill="currentColor"></rect>
+                    </svg>
+                  </div>
+                {% endunless %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="view-bundle-button">
+            <button type="button" onclick="openPopup('bundle-summary-popup')">
+              View Bundle ({{ bundle.content.items.size }})
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="bundle-summary-popup" class="popup-overlay">
+        <div class="popup-content bundle-summary-popup">
+          <button class="popup-close" onclick="closePopup('bundle-summary-popup')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="bundle-side-header">
+            <h2 class="bundle-side-title">Bundle Summary</h2>
+          </div>
+
+          <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3>DESCRIPTION</h3>
+              <div class="accordion-icon">
+                <svg class="plus-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                </svg>
+                <svg class="minus-icon" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                </svg>
+              </div>
+            </div>
+            <div class="accordion-content">
+              <p class="bundle-description">
+                Just add 3 of your favourite smoothies to get this exclusive discount!
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3>BUNDLE CONTENTS</h3>
+              <div class="accordion-icon">
+                <svg class="plus-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                </svg>
+                <svg class="minus-icon" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                </svg>
+              </div>
+            </div>
+            <div class="accordion-content">
+              <div class="bundle-items-list">
+                {% assign unique_items = bundle.content.unique_items %}
+                {% if unique_items.size > 0 %}
+                  {% for item in unique_items %}
+                    <div class="bundle-item">
+                      <div class="bundle-item-image">
+                        {% if item.variant.image %}
+                          <img src="{{ item.variant.image.src }}" alt="{{ item.variant.name }}">
+                        {% elsif item.variant.product.image %}
+                          <img src="{{ item.variant.product.image.src }}" alt="{{ item.variant.product.title }}">
+                        {% endif %}
+                      </div>
+                      <div class="bundle-item-info">
+                        <h3>{{ item.variant.name }}</h3>
+                        <p class="item-quantity">QTY: {{ item.quantity }} / {{ item.variant.title }}</p>
+                        {% remove_from_bundle_form item %}
+                        <button class="remove-item" type="submit">Remove</button>
+                        {% end_remove_from_bundle_form %}
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <div class="bundle-item-placeholder"></div>
+                  <div class="bundle-item-placeholder"></div>
+                  <div class="bundle-item-placeholder"></div>
+                  <div class="bundle-item-placeholder"></div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3>REQUIREMENTS</h3>
+              <div class="accordion-icon">
+                <svg class="plus-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                </svg>
+                <svg class="minus-icon" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                </svg>
+              </div>
+            </div>
+            <div class="accordion-content">
+              {% for error in bundle.errors %}
+                <p class="bundle-requirements">
+                  {{ error }}
+                </p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="bundle-summary-footer">
+            <div class="bundle-total">
+              <span class="bundle-total-label">Subtotal</span>
+              <span class="bundle-total-price">{{ bundle.content.price | money }}</span>
+            </div>
+            <div class="bundle-summary-actions">
+              {% add_to_cart_form %}
+              <button type="submit" {% unless bundle.can_add_to_cart %}disabled="disabled"{% endunless %}>
+                {% if bundle.adding_to_cart %}
+                  Processing...
+                {% else %}
+                  Add bundle to cart
+                {% endif %}
+              </button>
+              {% end_add_to_cart_form %}
+              <button type="button" class="hide-items-btn" onclick="closePopup('bundle-summary-popup')">
+                Hide items
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bundle-side-summary">
+      <div class="bundle-side-header">
+        <h2 class="bundle-side-title">Bundle Summary</h2>
+      </div>
+
+      <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3>DESCRIPTION</h3>
+          <div class="accordion-icon">
+            <svg class="plus-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+            </svg>
+            <svg class="minus-icon" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+            </svg>
+          </div>
+        </div>
+        <div class="accordion-content">
+          <p class="bundle-description">
+            Just add 3 of your favourite smoothies to get this exclusive discount!
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3>BUNDLE CONTENTS</h3>
+          <div class="accordion-icon">
+            <svg class="plus-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+            </svg>
+            <svg class="minus-icon" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+            </svg>
+          </div>
+        </div>
+        <div class="accordion-content">
+          <div class="bundle-items-list">
+            {% assign unique_items = bundle.content.unique_items %}
+            {% if unique_items.size > 0 %}
+              {% for item in unique_items %}
+                <div class="bundle-item">
+                  <div class="bundle-item-image">
+                    {% if item.variant.image %}
+                      <img src="{{ item.variant.image.src }}" alt="{{ item.variant.name }}">
+                    {% elsif item.variant.product.image %}
+                      <img src="{{ item.variant.product.image.src }}" alt="{{ item.variant.product.title }}">
+                    {% endif %}
+                  </div>
+                  <div class="bundle-item-info">
+                    <h3>{{ item.variant.name }}</h3>
+                    <p class="item-quantity">QTY: {{ item.quantity }} / {{ item.variant.title }}</p>
+                    {% remove_from_bundle_form item %}
+                    <button class="remove-item" type="submit">Remove</button>
+                    {% end_remove_from_bundle_form %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="bundle-item-placeholder"></div>
+              <div class="bundle-item-placeholder"></div>
+              <div class="bundle-item-placeholder"></div>
+              <div class="bundle-item-placeholder"></div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3>REQUIREMENTS</h3>
+          <div class="accordion-icon">
+            <svg class="plus-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+            </svg>
+            <svg class="minus-icon" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+            </svg>
+          </div>
+        </div>
+        <div class="accordion-content">
+          {% for error in bundle.errors %}
+            <p class="bundle-requirements">
+              {{ error }}
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="bundle-summary-footer">
+        <div class="bundle-total">
+          <span class="bundle-total-label">Subtotal</span>
+          <span class="bundle-total-price">{{ bundle.content.price | money }}</span>
+        </div>
+        <div class="bundle-summary-actions">
+          {% add_to_cart_form %}
+          <button type="submit" {% unless bundle.can_add_to_cart %}disabled="disabled"{% endunless %}>
+            {% if bundle.adding_to_cart %}
+              Processing...
+            {% else %}
+              Add bundle to cart
+            {% endif %}
+          </button>
+          {% end_add_to_cart_form %}
+          <button type="button" class="hide-items-btn" onclick="closePopup('bundle-summary-popup')">
+            Hide items
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <p>Sorry, this bundle is currently unavailable.</p>
+{% endif %}
+</div>
+<script>
+  document.querySelectorAll('.quantity-controls').forEach((control) => {
+    const input = control.querySelector('.quantity-input');
+    const minusBtn = control.querySelector('.minus');
+    const plusBtn = control.querySelector('.plus');
+
+    minusBtn.addEventListener('click', () => {
+      const currentValue = parseInt(input.value);
+      if (currentValue > 1) {
+        input.value = currentValue - 1;
+      }
+    });
+
+    plusBtn.addEventListener('click', () => {
+      const currentValue = parseInt(input.value);
+      if (currentValue < 99) {
+        input.value = currentValue + 1;
+      }
+    });
+  });
+</script>
+
+<script>
+  let activeProductActions = null;
+  let activeProductId = null;
+  let lastOpenPopupId = null;
+  let isPopupClosing = false;
+
+  document.body.style.overflow = 'unset';
+
+  function openPopup(popupId) {
+    const popup = document.getElementById(popupId);
+    const productId = popupId.replace('popup-', '');
+
+    if (popup) {
+      if (productId !== 'bundle-summary') {
+        // Retrieve product actions container and the placeholder in this popup
+        const productActions = document.getElementById(`product-actions-${productId}`);
+        const popupActionsPlaceholder = popup.querySelector('.popup-product-actions-placeholder');
+        
+        if (productActions && popupActionsPlaceholder) {
+          activeProductActions = productActions;
+          activeProductId = productId;
+          popupActionsPlaceholder.appendChild(productActions);
+        }
+      } else {
+        // If the popup is for the bundle summary, activate all accordions
+        setTimeout(() => {
+          popup.querySelectorAll('.accordion-content').forEach(content => {
+            const header = content.previousElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            content.classList.add('active');
+            icon.classList.add('active');
+            content.style.height = content.scrollHeight + 'px';
+          });
+        }, 100);
+      }
+      
+      // Activate the popup and update document styling
+      popup.classList.add('active');
+      document.body.classList.add('popup-open');
+      document.body.style.overflow = 'hidden';
+      lastOpenPopupId = popupId;
+      isPopupClosing = false;
+    }
+  }
+
+  function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup && !isPopupClosing) {
+      const productId = popupId.replace('popup-', '');
+
+      if (productId !== 'bundle-summary' && activeProductActions && activeProductId) {
+        const productCard = document.querySelector(`.product-card:has(#popup-${activeProductId})`);
+        if (productCard) {
+          productCard.appendChild(activeProductActions);
+        }
+        activeProductActions = null;
+        activeProductId = null;
+      }
+
+      popup.classList.remove('active');
+      lastOpenPopupId = null;
+
+      document.body.classList.remove('popup-open');
+      document.body.style.overflow = 'unset';
+      document.body.style.removeProperty('padding-right');
+    }
+  }
+
+  function closeAllPopups() {
+    if (!isPopupClosing) {
+      document.querySelectorAll('.popup-overlay.active').forEach((popup) => {
+        closePopup(popup.id);
+      });
+
+      document.body.classList.remove('popup-open');
+      document.body.style.overflow = 'unset';
+      document.body.style.removeProperty('padding-right');
+    }
+  }
+
+  document.addEventListener('submit', function (event) {
+    const popup = event.target.closest('.popup-overlay');
+    if (popup) {
+      const popupId = popup.id;
+      lastOpenPopupId = popupId;
+
+      setTimeout(() => {
+        openPopup(popupId);
+      }, 0);
+    }
+  });
+
+  // Handle bundlebuilder:render
+  document.addEventListener('bundlebuilder:render', function () {
+    // If we have a stored popup ID, reopen it
+    if (lastOpenPopupId) {
+      openPopup(lastOpenPopupId);
+    }
+  });
+
+  // Close popup when clicking outside content
+  document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('popup-overlay') && !isPopupClosing) {
+      closePopup(event.target.id);
+    }
+  });
+
+  // Prevent popup from closing when clicking inside popup-content
+  document.querySelectorAll('.popup-content').forEach((content) => {
+    content.addEventListener('click', function (event) {
+      event.stopPropagation();
+    });
+  });
+
+  // Close popup on escape key
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !isPopupClosing) {
+      const openPopup = document.querySelector('.popup-overlay.active');
+      if (openPopup) {
+        closePopup(openPopup.id);
+      }
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Open all accordions in the bundle summary popup by default
+    const bundleSummaryPopup = document.getElementById('bundle-summary-popup');
+    if (bundleSummaryPopup) {
+      bundleSummaryPopup.querySelectorAll('.accordion-header').forEach(header => {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.accordion-icon');
+        
+        content.classList.add('active');
+        icon.classList.add('active');
+        content.style.maxHeight = '1000px';
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+        content.style.transition = 'none';
+      });
+    }
+  });
+
+function toggleAccordion(header) {
+  const content = header.nextElementSibling;
+  const icon = header.querySelector('.accordion-icon');
+  const plusIcon = icon.querySelector('.plus-icon');
+  const minusIcon = icon.querySelector('.minus-icon');
+  
+  // Toggle active classes
+  content.classList.toggle('active');
+  icon.classList.toggle('active');
+  
+  // Toggle plus/minus icons
+  if (content.classList.contains('active')) {
+    content.style.maxHeight = '1000px';
+    content.style.opacity = '1';
+    content.style.transform = 'translateY(0)';
+    plusIcon.style.display = 'none';
+    minusIcon.style.display = 'block';
+  } else {
+    content.style.maxHeight = '0';
+    content.style.opacity = '0';
+    content.style.transform = 'translateY(-10px)';
+    plusIcon.style.display = 'block';
+    minusIcon.style.display = 'none';
+  }
+}
+
+function openAllAccordions() {
+  const accordions = document.querySelectorAll('.accordion-content');
+  accordions.forEach(content => {
+    const header = content.previousElementSibling;
+    const icon = header.querySelector('.accordion-icon');
+    const plusIcon = icon.querySelector('.plus-icon');
+    const minusIcon = icon.querySelector('.minus-icon');
+    
+    // Add active classes
+    content.classList.add('active');
+    icon.classList.add('active');
+    
+    // Set styles
+    content.style.maxHeight = '1000px';
+    content.style.opacity = '1';
+    content.style.transform = 'translateY(0)';
+    
+    // Toggle icons
+    plusIcon.style.display = 'none';
+    minusIcon.style.display = 'block';
+  });
+}
+
+// Open all accordions by default
+document.addEventListener('DOMContentLoaded', function() {
+  openAllAccordions();
+});
+
+// Reopen accordions after bundle updates
+document.body.addEventListener('bundlebuilder:render', function() {
+  openAllAccordions();
+});
+</script>
+
+<div class="mobile-toaster">
+  <div class="toaster-content">
+    <p class="toaster-message">You'll need to add 3 products in "Buy 3 full size bottles for 33% off".</p>
+    <button class="toaster-close" aria-label="Close notification" onclick="closeToaster()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  function closeToaster() {
+    const toaster = document.querySelector('.mobile-toaster');
+    if (toaster) {
+      toaster.style.setProperty('display', 'none', 'important');
+      toaster.remove(); // Completely remove the toaster from DOM
+      sessionStorage.setItem('toasterClosed', 'true');
+      localStorage.setItem('toasterClosed', 'true'); // Also store in localStorage for longer persistence
+    }
+  }
+
+  // Function to check if toaster should be shown
+  function shouldShowToaster() {
+    return !sessionStorage.getItem('toasterClosed') && 
+           !localStorage.getItem('toasterClosed') && 
+           window.innerWidth <= 768;
+  }
+
+  // Show toaster initially only if it hasn't been closed before
+  document.addEventListener('DOMContentLoaded', function() {
+    const toaster = document.querySelector('.mobile-toaster');
+    if (toaster && shouldShowToaster()) {
+      setTimeout(() => {
+        toaster.style.display = 'block';
+      }, 500);
+    } else if (toaster) {
+      toaster.remove(); 
+    }
+  });
+
+  // Prevent toaster from showing after any DOM updates
+  const observer = new MutationObserver(function() {
+    const toaster = document.querySelector('.mobile-toaster');
+    if (toaster && (sessionStorage.getItem('toasterClosed') || localStorage.getItem('toasterClosed'))) {
+      toaster.remove();
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
+
+
+<div class="bundle-summary">
+  <div class="bundle-summary-content">
+    <div class="bundle-summary-info">
+      <span class="bundle-summary-subtotal">Subtotal</span>
+      <span class="bundle-summary-total">{{ bundle.content.price | money }}</span>
+      <div class="bundle-summary-actions">
+      {% add_to_cart_form %}
+      <button type="submit" {% unless bundle.can_add_to_cart %}disabled="disabled"{% endunless %}>
+        {% if bundle.adding_to_cart %}
+          Processing...
+        {% else %}
+          Add bundle to cart
+        {% endif %}
+      </button>
+      {% end_add_to_cart_form %}
+      <button type="button" class="hide-items-btn" onclick="closePopup('bundle-summary-popup')">
+        Hide items
+      </button>
+    </div>
+      <button class="view-bundle-button" onclick="openPopup('bundle-summary-popup')">
+        View Items ({{ bundle.content.items.size }})
+      </button>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  // Open accordions on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    openAllAccordions();
+  });
+
+  // Keep accordions open after bundle updates
+  document.body.addEventListener('bundlebuilder:render', function() {
+    openAllAccordions();
+  });
+
+
+  const styles = `
+    @media (max-width: 768px) {
+      .accordion-content {
+        max-height: 1000px !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      
+      .accordion-icon {
+        display: none;
+      }
+    }
+  `;
+
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
+
+  
+  // Add event listener for section switch form submissions
+  document.addEventListener('submit', function(e) {
+    if (e.target.classList.contains('bundle-builder--section-switch-form')) {
+      // Store the fact that we're switching sections
+      sessionStorage.setItem('shouldScrollTop', 'true');
+    }
+  });
+
+  // Add event listener for bundle builder render events
+  document.body.addEventListener('bundlebuilder:render', function() {
+    if (sessionStorage.getItem('shouldScrollTop')) {
+      // Remove the flag
+      sessionStorage.removeItem('shouldScrollTop');
+      
+      // Smooth scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  });
+</script>
