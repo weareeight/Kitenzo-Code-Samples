@@ -456,7 +456,7 @@ input.quantity-input {
 @media (max-width: 768px) {
   .product-card {
     grid-template-columns: 80px 1fr;
-    grid-template-areas: 
+    grid-template-areas:
       "image info"
       "actions actions";
     padding: 16px;
@@ -875,7 +875,7 @@ input.quantity-input {
     height: auto;
     width: 100%;
   }
-  
+
   .product-actions {
     grid-column: 1 / -1;
     margin: 0;
@@ -1200,7 +1200,7 @@ form.bundle-builder--section-switch-form {
 
 .bundle-main-content {
   flex: 1;
-  max-width: calc(100% - 400px); 
+  max-width: calc(100% - 400px);
 }
 
 .bundle-header {
@@ -1749,12 +1749,12 @@ h2.bundle-steps-subheading {
   form.bundle-builder--change-quantity-form {
     width: 100%;
   }
-  
+
   .product-actions-container {
     height: auto;
     width: 100%;
   }
-  
+
   .product-actions {
     grid-column: 1 / -1;
     margin: 0;
@@ -1902,7 +1902,7 @@ h2.bundle-steps-subheading {
 
 @media (max-width: 768px) {
   .bundle-side-summary {
-    display: none; 
+    display: none;
   }
 
   .bundle-summary {
@@ -1914,9 +1914,9 @@ h2.bundle-steps-subheading {
     padding: 20px;
     border-top: 1px solid #eee;
     z-index: 99;
-    display: flex !important; 
+    display: flex !important;
     flex-direction: column;
-    
+
   }
 
   .bundle-summary-content {
@@ -2009,7 +2009,7 @@ h2.bundle-steps-subheading {
   .bundle-summary-content {
     width: 100%;
     display: flex;
-    flex-direction: column-reverse; 
+    flex-direction: column-reverse;
     gap: 12px;
   }
 
@@ -2030,7 +2030,7 @@ h2.bundle-steps-subheading {
     flex-direction: column;
     gap: 8px;
     width: 100%;
-    margin-bottom: 8px; 
+    margin-bottom: 8px;
   }
 
   .view-bundle-button {
@@ -2253,7 +2253,7 @@ observer.observe(document.body, {
   .popup-content.bundle-summary-popup .accordion-header {
     padding: 12px 0;
   }
-  
+
   .popup-content.bundle-summary-popup .accordion-header h3 {
     font-size: 14px;
   }
@@ -2265,7 +2265,7 @@ observer.observe(document.body, {
     opacity: 1 !important;
     transform: translateY(0) !important;
   }
-  
+
   .accordion-icon {
     display: none;
   }
@@ -2278,38 +2278,38 @@ observer.observe(document.body, {
     transform: translateY(-10px);
     transition: all 0.3s ease-in-out;
   }
-  
+
   .popup-content.bundle-summary-popup .accordion-content.active {
     height: auto;
     opacity: 1;
     transform: translateY(0);
   }
-  
+
   .popup-content.bundle-summary-popup .accordion-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
   }
-  
+
   .popup-content.bundle-summary-popup .accordion-icon.active {
     transform: rotate(180deg);
   }
-  
+
   .popup-content.bundle-summary-popup .plus-icon,
   .popup-content.bundle-summary-popup .minus-icon {
     width: 12px;
     height: 12px;
   }
-  
+
   .popup-content.bundle-summary-popup .minus-icon {
     display: none;
   }
-  
+
   .popup-content.bundle-summary-popup .accordion-icon.active .plus-icon {
     display: none;
   }
-  
+
   .popup-content.bundle-summary-popup .accordion-icon.active .minus-icon {
     display: block;
   }
@@ -2454,7 +2454,7 @@ observer.observe(document.body, {
   .popup-product-actions {
     width: 100%;
   }
-  
+
   .popup-actions {
     grid-column: 1 / -1;
     margin: 0;
@@ -2531,13 +2531,10 @@ observer.observe(document.body, {
         </div>
       </div>
 
-      <script>
-        console.log('Bundle Content:', JSON.parse({{ bundle.content.items | json | json_string }}));
-      </script>
       <div class="bundle-steps-text">
         <h2 class="bundle-steps-subheading">{{ bundle.current_section.name }}</h2>
       </div>
-      
+
       <div class="product-grid">
         {% for product in bundle.current_section.products %}
           <div class="product-card">
@@ -2623,7 +2620,7 @@ observer.observe(document.body, {
                 {% end_add_to_bundle_form %}
               {% else %}
                 {% for variant in product.variants_in_bundle %}
-                    
+
                   {% change_quantity_form %}
                   <div class="product-actions">
                     <div class="quantity-controls">
@@ -2679,7 +2676,7 @@ observer.observe(document.body, {
                     <div class="popup-product-description">
                       {{ product.description }}
                     </div>
-                    
+
                     <!-- New separate product actions for popup -->
                     <div class="popup-product-actions">
                       {% if product.variants_in_bundle.size == 0 %}
@@ -3127,7 +3124,7 @@ observer.observe(document.body, {
         // Retrieve product actions container and the placeholder in this popup
         const productActions = document.getElementById(`product-actions-${productId}`);
         const popupActionsPlaceholder = popup.querySelector('.popup-product-actions-placeholder');
-        
+
         if (productActions && popupActionsPlaceholder) {
           activeProductActions = productActions;
           activeProductId = productId;
@@ -3145,7 +3142,7 @@ observer.observe(document.body, {
           });
         }, 100);
       }
-      
+
       // Activate the popup and update document styling
       popup.classList.add('active');
       document.body.classList.add('popup-open');
@@ -3241,7 +3238,7 @@ observer.observe(document.body, {
       bundleSummaryPopup.querySelectorAll('.accordion-header').forEach(header => {
         const content = header.nextElementSibling;
         const icon = header.querySelector('.accordion-icon');
-        
+
         content.classList.add('active');
         icon.classList.add('active');
         content.style.maxHeight = '1000px';
@@ -3257,11 +3254,11 @@ function toggleAccordion(header) {
   const icon = header.querySelector('.accordion-icon');
   const plusIcon = icon.querySelector('.plus-icon');
   const minusIcon = icon.querySelector('.minus-icon');
-  
+
   // Toggle active classes
   content.classList.toggle('active');
   icon.classList.toggle('active');
-  
+
   // Toggle plus/minus icons
   if (content.classList.contains('active')) {
     content.style.maxHeight = '1000px';
@@ -3285,16 +3282,16 @@ function openAllAccordions() {
     const icon = header.querySelector('.accordion-icon');
     const plusIcon = icon.querySelector('.plus-icon');
     const minusIcon = icon.querySelector('.minus-icon');
-    
+
     // Add active classes
     content.classList.add('active');
     icon.classList.add('active');
-    
+
     // Set styles
     content.style.maxHeight = '1000px';
     content.style.opacity = '1';
     content.style.transform = 'translateY(0)';
-    
+
     // Toggle icons
     plusIcon.style.display = 'none';
     minusIcon.style.display = 'block';
@@ -3337,8 +3334,8 @@ document.body.addEventListener('bundlebuilder:render', function() {
 
   // Function to check if toaster should be shown
   function shouldShowToaster() {
-    return !sessionStorage.getItem('toasterClosed') && 
-           !localStorage.getItem('toasterClosed') && 
+    return !sessionStorage.getItem('toasterClosed') &&
+           !localStorage.getItem('toasterClosed') &&
            window.innerWidth <= 768;
   }
 
@@ -3350,7 +3347,7 @@ document.body.addEventListener('bundlebuilder:render', function() {
         toaster.style.display = 'block';
       }, 500);
     } else if (toaster) {
-      toaster.remove(); 
+      toaster.remove();
     }
   });
 
@@ -3389,7 +3386,7 @@ document.body.addEventListener('bundlebuilder:render', function() {
         View Items ({{ bundle.content.items.size }})
       </button>
     </div>
-    
+
   </div>
 </div>
 
@@ -3412,7 +3409,7 @@ document.body.addEventListener('bundlebuilder:render', function() {
         opacity: 1 !important;
         transform: translateY(0) !important;
       }
-      
+
       .accordion-icon {
         display: none;
       }
@@ -3423,7 +3420,7 @@ document.body.addEventListener('bundlebuilder:render', function() {
   styleSheet.textContent = styles;
   document.head.appendChild(styleSheet);
 
-  
+
   // Add event listener for section switch form submissions
   document.addEventListener('submit', function(e) {
     if (e.target.classList.contains('bundle-builder--section-switch-form')) {
@@ -3437,7 +3434,7 @@ document.body.addEventListener('bundlebuilder:render', function() {
     if (sessionStorage.getItem('shouldScrollTop')) {
       // Remove the flag
       sessionStorage.removeItem('shouldScrollTop');
-      
+
       // Smooth scroll to top
       window.scrollTo({
         top: 0,

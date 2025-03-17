@@ -42,7 +42,7 @@
       flex-shrink: 0;
     }
 
-    .read-more {
+    .quick-view-button {
       color: #000;
       text-decoration: underline;
       font-size: 0.9em;
@@ -50,17 +50,17 @@
       display: inline-flex;
       align-items: center;
       margin-left: 0;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       border: 0px;
       background-color: transparent;
     }
 
-    .read-more-icon {
+    .quick-view-icon {
       display: inline-flex;
       margin-left: 4px;
     }
 
-    .read-more-icon svg {
+    .quick-view-icon svg {
       stroke-width: 1.4;
     }
 
@@ -784,6 +784,39 @@
       transition: all 0.3s ease;
     }
 
+    .product-options-select {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      padding: 13.5px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      text-align: center;
+      padding-right: 28px;
+      cursor: pointer;
+      background: 0 0;
+    }
+
+    .product-options-select-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 8px;
+    }
+
+    .product-options-select-wrapper::after {
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid;
+      content: '';
+      right: 11px;
+      top: 45%;
+      position: absolute;
+    }
+
     .popup-product-actions-placeholder {
       margin-top: auto;
     }
@@ -1049,18 +1082,23 @@
       font-weight: 500;
       transition: background-color 0.2s ease;
       width: 100px;
-  }
-  form.bundle-builder--section-switch-form {
+    }
+
+    form.bundle-builder--section-switch-form {
       text-align: center;
-  }
+    }
 </style>
 
 <script type="text/javascript">
   const selectedVariants = new Map();
 
   function setAddDisabled(form) {
-    const variantId = form.querySelector('[name="variant"]').value;
-    const sectionId = form.querySelector('[name="section"]').value;
+    const variantId = form.querySelector('[name="variant"]')?.value;
+    const sectionId = form.querySelector('[name="section"]')?.value;
+    if (variantId === undefined || sectionId === undefined) {
+      console.warn(`Invalid variant ${variantId} in section ${sectionId}`);
+      return;
+    }
     const canAdd = window.BundleBuilder.canAddVariant(variantId, sectionId);
     form.querySelector('[type="submit"]').disabled = !canAdd;
   }
@@ -1069,12 +1107,20 @@
     document.querySelectorAll('.bundle-builder--add-to-bundle-form select[name="variant"]'),
     function (select) {
       select.addEventListener('change', function (e) {
+        const productCard = e.target.closest('.product-card');
         const variantId = e.target.value;
         selectedVariants.set(e.target.id, variantId);
-        const price = e.target.querySelector('option[value="' + variantId + '"]').dataset.price;
-        e.target.parentNode.querySelector('.variant-price').textContent = price;
+        const variantOption = e.target.querySelector('option[value="' + variantId + '"]');
+        // Update price
+        const price = variantOption.dataset.price;
+        productCard.querySelector('.variant-price').textContent = price;
+        // Update variant image
+        const imgSrc = variantOption.dataset.image;
+        if (imgSrc) {
+          productCard.querySelector('img').src = imgSrc;
+        }
 
-        const form = e.target.parentElement;
+        const form = e.target.closest('form');
         setAddDisabled(form);
       });
     }
@@ -1100,7 +1146,7 @@
       src="https://live.bb.eight-cdn.com/static/assets/imagePlaceholder-xbgPBTTe.svg"
       alt="Bundle header"
       class="bundle-header-bg"
-    >
+    />
     <div class="bundle-header-content">
       <div class="bundle-header-text">
         <p class="bundle-subheading">BUNDLE BUILDER</p>
@@ -1109,10 +1155,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    console.log('Bundle Content:', JSON.parse({{ bundle.content.items | json | json_string }}));
-  </script>
 
   <div class="steps-container">
     <h2 class="steps-heading">Instructions</h2>
@@ -1143,65 +1185,83 @@
   <div class="product-grid">
     {% for product in bundle.current_section.products %}
       <div class="product-card">
-        <img src="{{ product.image.src }}" alt="{{ product.title }}">
+        <img src="{{ product.image.src }}" alt="{{ product.title }}" />
         <h2>{{ product.title }}</h2>
         <span class="variant-price">{{ product.variants[0].price | money }}</span>
         <p class="product-description">
           {{ product.description | strip_html | truncate: 100 }}
         </p>
-        <button class="read-more" onclick="openPopup('popup-{{ product.id }}')">
+
+        <quick-view variant="{{ product.variants[0].id }}" section="{{ bundle.current_section.id }}">
           Read more
-          <span class="read-more-icon">
+          <span class="quick-view-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" fill="none">
               <path stroke="currentColor" stroke-linecap="round" d="M1 .5 6 5 1 9.5" style="stroke-width: 1.4;"></path>
             </svg>
           </span>
-        </button>
+        </quick-view>
 
         <div id="product-actions-{{ product.id }}" class="product-actions-container">
           {% if product.variants_in_bundle.size == 0 %}
             {% add_to_bundle_form bundle.current_section %}
-            <select name="variant" style="display: none;">
-              {% for variant in product.available_variants %}
-                <option
-                  value="{{ variant.id }}"
-                  {% if forloop.first %}
-                    selected
-                  {% endif %}
-                >
-                  {{ variant.title }}
-                </option>
-              {% endfor %}
-            </select>
+              {% if product.available_variants.size > 1 %}
+                <div class="product-options-select-wrapper">
+                  <select class="product-options-select" name="variant">
+                    {% for variant in product.available_variants %}
+                      <option
+                        value="{{ variant.id }}"
+                        data-price="{{ variant.price | money }}"
+                        {% if variant.image_id %}
+                          {% for image in product.images %}
+                            {% if image.id == variant.image_id %}
+                              data-image="{{ image.src }}"
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        {% if forloop.first %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ variant.title }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% else %}
+                <input type="hidden" name="variant" value="{{ product.available_variants[0].id }}" />
+              {% endif %}
 
-            <div class="product-actions">
-              <div class="quantity-controls">
-                <button type="button" class="quantity-btn minus" aria-label="Decrease quantity by 1">
-                  <svg
-                    data-testid="minus-icon"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 2"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
-                  </svg>
-                </button>
-                <input type="number" name="quantity" class="quantity-input" value="1" min="1" max="99">
-                <button type="button" class="quantity-btn plus" aria-label="Increase quantity by 1">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
-                  </svg>
-                </button>
+              <div class="product-actions">
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn minus" aria-label="Decrease quantity by 1">
+                    <svg
+                      data-testid="minus-icon"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 2"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6667 0.300003H1.33333C0.817194 0.300003 0.399994 0.613603 0.399994 1C0.399994 1.3864 0.817194 1.7 1.33333 1.7H10.6667C11.1828 1.7 11.6 1.3864 11.6 1C11.6 0.613603 11.1828 0.300003 10.6667 0.300003Z" fill="#5C5F62"/>
+                    </svg>
+                  </button>
+                  <input type="number" name="quantity" class="quantity-input" value="1" min="1" max="99">
+                  <button type="button" class="quantity-btn plus" aria-label="Increase quantity by 1">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9 5.3H6.7V1.1C6.7 0.713602 6.3871 0.400002 6 0.400002C5.6129 0.400002 5.3 0.713602 5.3 1.1V5.3H1.1C0.712902 5.3 0.400002 5.6136 0.400002 6C0.400002 6.3864 0.712902 6.7 1.1 6.7H5.3V10.9C5.3 11.2864 5.6129 11.6 6 11.6C6.3871 11.6 6.7 11.2864 6.7 10.9V6.7H10.9C11.2871 6.7 11.6 6.3864 11.6 6C11.6 5.6136 11.2871 5.3 10.9 5.3" fill="#5C5F62"/>
+                    </svg>
+                  </button>
+                </div>
+                <button type="submit" class="add-to-bundle-btn">ADD</button>
               </div>
-              <button type="submit" class="add-to-bundle-btn">ADD</button>
-            </div>
             {% end_add_to_bundle_form %}
           {% else %}
             {% for variant in product.variants_in_bundle %}
               {% change_quantity_form %}
               <div class="product-actions">
+                {% if variant.title != 'Default Title' %}
+                  {{ variant.title }}
+                {% endif %}
                 <div class="quantity-controls">
                   <button type="submit" name="remove" class="quantity-btn minus" aria-label="Decrease quantity by 1">
                     <svg
