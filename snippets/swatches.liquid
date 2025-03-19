@@ -1,0 +1,93 @@
+...
+{% comment %}
+This is a snippet for the color swatches in your bundles.
+
+To use it, you need to add the following code to your Template Creator code.
+
+You need to replace the #color_swatch_config with the id of the color swatch config in
+your template and then adjust the rest of the code to match your swatch config.
+{% endcomment %}
+
+<style>
+    .swatch label {
+        margin: 3px;
+        border-radius: 50%;
+        height: 34px;
+        width: 34px;
+    }
+
+    .swatch.selected label {
+        outline: solid #0F0 1px;
+        outline-offset: 2px;
+    }
+
+    .swatch label input {
+        display: none;
+    }
+</style>
+
+<script type="text/javascript">
+  // Load config for swatches
+  const swatchConfigEl = document.querySelector('#color_swatch_config');
+  if (!swatchConfigEl) {
+    console.error('No swatch config found');
+  }
+  const swatchConfig = JSON.parse(swatchConfigEl.textContent);
+  const colorMap = new Map(swatchConfig.split('\n').map(item => item.split(':')));
+
+  function render() {
+    // Handle swatches
+    [...document.querySelectorAll('.swatch')].forEach(
+      (swatch) => {
+        const label = swatch.getAttribute('data-swatch');
+        const variantId = swatch.getAttribute('data-variant-id');
+        const color = colorMap.get(label);
+        swatch.querySelector('label').style.backgroundColor = color;
+        swatch.addEventListener('click', (e) => {
+          const form = swatch.closest('form');
+          const productId = e.target.getAttribute('data-product-id');
+          const oldVariantId = selectedVariants.get(productId);
+          if (oldVariantId) {
+            form.querySelector('.selected').classList.remove('selected');
+          }
+
+          selectVariant(form, productId, variantId, label);
+        });
+      }
+    );
+
+    selectedVariants.entries().forEach(([key, value]) => {
+      document.querySelector(`.swatch[data-variant-id="${value}"]`).click();
+    });
+  }
+
+  document.body.addEventListener('bundlebuilder:render', render);
+  render();
+</script>
+
+...
+
+{% add_to_bundle_form bundle.current_section %}
+    <div>Selected color: <strong class="selected-option">{{ product.available_variants[0].title }}</strong></div>
+    <input type="hidden" name="variant" value="{{ product.available_variants[0].id }}" />
+    <div class="variant-options">
+        {% for variant in product.available_variants %}
+            <div
+                class="swatch {% if forloop.index0 == 0 %}selected{% endif %}"
+                data-swatch="{{ variant.title }}"
+                data-product-id="{{ product.id }}"
+                data-variant-id="{{ variant.id }}"
+            >
+                <label>
+                    <input type="radio" name="swatch-{{ product.id }}" value="{{ variant.id }}" />
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="product-actions">
+        <button type="submit" class="add-to-bundle-btn">ADD</button>
+    </div>
+{% end_add_to_bundle_form %}
+
+...
