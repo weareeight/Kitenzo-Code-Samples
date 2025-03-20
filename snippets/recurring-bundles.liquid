@@ -1,0 +1,23 @@
+{% if bundle.subscription_type == 'optional' and bundle.subscription_frequencies.size > 0 %}
+    <label>
+        <input type="radio" name="subscription-enabled" value="0" />
+        One-time purchase
+    </label>
+    <label>
+        <input type="radio" name="subscription-enabled" value="1" />
+        Subscribe
+    </label>
+{% endif %}
+{% if bundle.subscription_type == 'required' or bundle.subscription_enabled %}
+    {% for frequency in bundle.subscription_frequencies %}
+    <ul>
+        <li>
+            <label>
+                <input type="radio" name="subscription-frequency" value="{{ frequency.id }}" />
+                {{ frequency.frequency }} {{ frequency.unit }}
+            </label>
+        </li>
+    </ul>
+    {% endfor %}
+    Email: <input type="email" required name="subscription-email" value="{{ settings.subscription_email }}" />
+{% endif %}
