@@ -1,0 +1,41 @@
+{% comment %}
+Render content of any Page from your online store into your template.
+{% endcomment %}
+
+{% comment %}
+First create a target for your content. This can be anywhere in the template. The value of the `data-bundle-page-content` should be the handle of the Page.
+{% endcomment %}
+
+<div data-bundle-page-content="bundle-info"></div>
+
+{% comment %}
+Now add script that will get the Page and render its content into the target.
+{% endcomment %}
+
+<script type="text/javascript">
+  Array.from(document.querySelectorAll('[data-bundle-page-content]')).forEach((el) => {
+    const key = el.getAttribute('data-bundle-page-content');
+    if (!key) {
+      return;
+    }
+    window.bundle_page_contents = window.bundle_page_contents || {};
+    let value = window.bundle_page_contents[key];
+    if (!value) {
+      fetch(`/pages/${key}.json`).then((response) => {
+        if (!response.ok) {
+          console.warn(`Page ${key} loading failed`, response.statusCode);
+          return;
+        }
+        response.json().then((page) => {
+          console.log('page', page.page.body_html);
+          value = page.page.body_html;
+          window.bundle_page_contents[key] = value;
+          el.innerHTML = value;
+          console.log('page2', value);
+        })
+      });
+    } else {
+      el.innerHTML = value ?? '';
+    }
+  });
+</script>
