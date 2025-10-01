@@ -1,0 +1,26 @@
+<input type="text" id="filter" placeholder="Filter..." />
+<script>
+  window.kitenzoFilter = window.kitenzoFilter ?? '';
+  const applyFilter = () => {
+    document.querySelectorAll('[data-filter]').forEach(el => {
+      el.style.display = el.dataset.filter.toLowerCase().includes(window.kitenzoFilter.toLowerCase()) ? 'block' : 'none';
+    });
+  }
+  const inp = document.querySelector('#filter');
+  inp.value = window.kitenzoFilter ?? '';
+  if (inp) {
+    inp.addEventListener('input', e => {
+      window.kitenzoFilter = e.currentTarget.value;
+      applyFilter()
+    });
+    applyFilter()
+  }
+</script>
+...
+<div class="product-grid">
+  {% for product in bundle.current_section.products %}
+    <div class="product-card" data-filter="{{ product.title }}">
+        <h2>{{ product.title }}</h2>
+    </div>
+  {% endfor %}
+</div>
